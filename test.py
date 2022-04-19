@@ -1,19 +1,19 @@
-from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
+from bpmcord.utils.config import CLIENTID, FRAMES, SPEED
+from pypresence import Presence
+import time
 
-from .utils import exceptions, Log
 
-class SimpleEcho(WebSocket):
-    def handleMessage(self):
-        Log(1, self.data)
-    
-    def handleConnected(self):
-        Log(1, self.data)
+RPC = Presence(str(CLIENTID))
+RPC.connect() 
+# time script had ran for
+start = time.time()
 
-    def handleClose(self):
-        Log(3, "Client disconnected from the server.")
-        raise exceptions.WatchDisconnected(self.data)
 
-server = SimpleWebSocketServer('0.0.0.0', 3476, SimpleEcho)
+def animate(heartRate=None, motion=None, basalEnergyBurned=None, calories=None, timestamp=None):
+    print("UPDATING STATUS")
+    for i in range(int(24)):
+        time.sleep(float(0.05))
+        RPC.update(state=heartRate, details=heartRate, large_image=str(i+1), large_text=heartRate, small_image="1", small_text=heartRate, start=start)
 
-Log(1, "--------------- BPMCORD SERVER STARTED ---------------")
-server.serveforever()
+while True:
+    animate("72")

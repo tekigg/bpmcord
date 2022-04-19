@@ -1,10 +1,14 @@
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
-
 from .utils import exceptions, Log
-
+from .animate import *
+from .utils.objects import *
 class ws(WebSocket):
     def handleMessage(self):
         Log(1, self.data)
+        if self.data.split(":")[0] == "heartRate":
+            print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHH!!!!!!!!!!!!')
+            heartRate = HeartBeat(self.data)
+            Animate.animate(heartRate)
 
     def handleConnected(self):
         Log(1, "Client connected successfully.")
@@ -15,4 +19,3 @@ class ws(WebSocket):
 
     def stop(self):
         self.close()
-
