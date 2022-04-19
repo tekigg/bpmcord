@@ -5,19 +5,18 @@ BPMCORD - A python package for the BPMCORD project.
 Show your heart rate in real time on your discord status, no Health Data Server needed.
 """
 
-state = False
-
 from bpmcord.tray import *
+from bpmcord.server import *
 
+def on_clicked():
+    server.close()
+    tray.exit()
 
-def on_clicked(item):
-    print("check")
+tray = Tray(menu=menu(item("Exit", on_clicked)))
+server = SimpleWebSocketServer('0.0.0.0', 3476, ws)
 
-Tray(menu(
-    item(
-        'Enable',
-        on_clicked,
-        checked=lambda item: state)))
-
-
-from bpmcord import server
+try:
+    Log(1, "--------------- BPMCORD SERVER STARTED ---------------")
+    server.serveforever()
+except Exception as e:
+    Log(3, "--------------- BPMCORD SERVER UNABLE TO RUN ---------------\n{}".format(e))

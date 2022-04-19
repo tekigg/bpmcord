@@ -10,6 +10,7 @@ class Tray:
     
     def exit(self):
         self.icon.stop()
+        
         exit()
 
 

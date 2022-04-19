@@ -1,11 +1,11 @@
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 
-from utils import exceptions, Log
+from .utils import exceptions, Log
 
-class SimpleEcho(WebSocket):
+class ws(WebSocket):
     def handleMessage(self):
         Log(1, self.data)
-    
+
     def handleConnected(self):
         Log(1, "Client connected successfully.")
 
@@ -13,7 +13,6 @@ class SimpleEcho(WebSocket):
         Log(3, "Client disconnected from the server.")
         raise exceptions.WatchDisconnected(self.data)
 
-server = SimpleWebSocketServer('0.0.0.0', 3476, SimpleEcho)
+    def stop(self):
+        self.close()
 
-Log(1, "--------------- BPMCORD SERVER STARTED ---------------")
-server.serveforever()
