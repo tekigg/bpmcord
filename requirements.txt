@@ -1,6 +1,6 @@
-pypresence
-asyncio
-coloredlogs
-pystray
-PIL
-SimpleWebSocketServer
+coloredlogs==15.0.1
+Pillow==9.1.0
+pypresence==4.2.1
+pystray==0.19.3
+SimpleWebSocketServer==0.1.1
+winshell==0.6
