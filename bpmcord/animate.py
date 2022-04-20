@@ -16,7 +16,7 @@ class Animate():
         self.calories = None
         self.timestamp = None
 
-    def animate(self):
+    def animate(self): # lmao all that work for nothing. Gonna rewrite all of this later.
         try:
             if SHOW_TIME:
                 RPC.update(state=replace(STATE, self.heartRate), details=DETAILS, large_image=LARGE_IMAGE, large_text=LARGE_TEXT, small_image=SMALL_IMAGE, small_text=SMALL_TEXT, start=start)

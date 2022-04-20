@@ -1,5 +1,4 @@
 import configparser
-from webbrowser import get
 from .paths import CONFIG
 Configuration = configparser.ConfigParser()
 Configuration.read(CONFIG)
