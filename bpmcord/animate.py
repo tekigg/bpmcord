@@ -1,25 +1,26 @@
 from bpmcord.utils.objects import HeartBeat
-from .utils.config import CLIENTID, FRAMES, SPEED
+from .utils.config import CLIENTID, STATE, DETAILS, LARGE_IMAGE, LARGE_TEXT, SMALL_IMAGE, SMALL_TEXT, SHOW_TIME, replace
 from pypresence import Presence
 import time
-import asyncio
-from multiprocessing import Pool
-
 RPC = Presence(str(CLIENTID))
 RPC.connect() 
+
 # time script had ran for
 start = time.time()
 
-class Animate(HeartBeat):
+class Animate():
     def __init__(self):
-        self.heartRate = HeartBeat
+        self.heartRate = None
         self.motion = None
         self.basalEnergyBurned = None
         self.calories = None
         self.timestamp = None
 
-    def animate(self, heartRate=None, motion=None, basalEnergyBurned=None, calories=None, timestamp=None):
-        print("UPDATING STATUS")
-        for i in range(FRAMES+1):
-            time.sleep(SPEED)
-            RPC.update(state="BPMCORD", details="BPMCORD", large_image=str(i+1), large_text=heartRate, small_image="bpmcord", small_text="BPMCORD", start=start)
+    def animate(self):
+        try:
+            if SHOW_TIME:
+                RPC.update(state=replace(STATE, self.heartRate), details=DETAILS, large_image=LARGE_IMAGE, large_text=LARGE_TEXT, small_image=SMALL_IMAGE, small_text=SMALL_TEXT, start=start)
+            else:
+                RPC.update(state=replace(STATE, self.heartRate), details=DETAILS, large_image=LARGE_IMAGE, large_text=LARGE_TEXT, small_image=SMALL_IMAGE, small_text=SMALL_TEXT, start=None)
+        except Exception as e:
+            print(e)

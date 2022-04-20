@@ -11,7 +11,12 @@ if not exists(MANAGED): os.makedirs(MANAGED+'\logs')  #WORK FFS
 if not exists(CONFIG):
     with open(CONFIG, 'w+', encoding="utf-8") as f: f.write(f"""[DEFAULT]
 ClientId = 966086356617019422
-Frames = 24
-Speed = 0.5"""); f.close()
+ShowTimestamp = True
+State = $heartRate
+Details = Details
+LargeImage = 10
+LargeText = Large Text
+SmallImage = 10
+smallText = Small Text"""); f.close()
 
 
